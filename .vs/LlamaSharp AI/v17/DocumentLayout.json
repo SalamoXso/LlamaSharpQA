@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|c:\\users\\user\\source\\repos\\llamasharp ai\\llamasharp ai\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|solutionrelative:llamasharp ai\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|c:\\users\\user\\source\\repos\\llamasharp ai\\llamasharp ai\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|solutionrelative:llamasharp ai\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|c:\\users\\user\\source\\repos\\llamasharp ai\\llamasharp ai\\controls\\visibilityconverters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|solutionrelative:llamasharp ai\\controls\\visibilityconverters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|c:\\users\\user\\source\\repos\\llamasharp ai\\llamasharp ai\\services\\modelloaderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|solutionrelative:llamasharp ai\\services\\modelloaderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|c:\\users\\user\\source\\repos\\llamasharp ai\\llamasharp ai\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|solutionrelative:llamasharp ai\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|c:\\users\\user\\source\\repos\\llamasharp ai\\llamasharp ai\\controls\\converters.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A0922EA0-901E-43ED-8124-164F527866B7}|LlamaSharp AI\\LocalLLMQA.csproj|solutionrelative:llamasharp ai\\controls\\converters.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "LlamaSharp AI\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "LlamaSharp AI\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAgwKMAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T23:49:55.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ModelLoaderService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Services\\ModelLoaderService.cs",
+              "RelativeDocumentMoniker": "LlamaSharp AI\\Services\\ModelLoaderService.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Services\\ModelLoaderService.cs",
+              "RelativeToolTip": "LlamaSharp AI\\Services\\ModelLoaderService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAACcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T23:56:02.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "LlamaSharp AI\\Views\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "LlamaSharp AI\\Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-07T23:52:02.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Services\\ChatService.cs",
+              "RelativeDocumentMoniker": "LlamaSharp AI\\Services\\ChatService.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Services\\ChatService.cs",
+              "RelativeToolTip": "LlamaSharp AI\\Services\\ChatService.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAowFsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T23:47:50.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Converters.xaml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Controls\\Converters.xaml",
+              "RelativeDocumentMoniker": "LlamaSharp AI\\Controls\\Converters.xaml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Controls\\Converters.xaml",
+              "RelativeToolTip": "LlamaSharp AI\\Controls\\Converters.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-08T00:58:35.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VisibilityConverters.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Controls\\VisibilityConverters.cs",
+              "RelativeDocumentMoniker": "LlamaSharp AI\\Controls\\VisibilityConverters.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\LlamaSharp AI\\LlamaSharp AI\\Controls\\VisibilityConverters.cs",
+              "RelativeToolTip": "LlamaSharp AI\\Controls\\VisibilityConverters.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAACUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-08T01:06:27.039Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

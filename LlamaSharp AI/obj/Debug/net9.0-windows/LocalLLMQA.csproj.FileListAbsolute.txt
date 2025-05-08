@@ -115,6 +115,7 @@ C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\LocalLLMQA.AssemblyInfoInputs.cache
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\LocalLLMQA.AssemblyInfo.cs
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\LocalLLMQA.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\LocalLLMQA.sourcelink.json
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\LocalLLMQA.csproj.Up2Date
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\LocalLLMQA.dll
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Debug\net9.0-windows\refint\LocalLLMQA.dll

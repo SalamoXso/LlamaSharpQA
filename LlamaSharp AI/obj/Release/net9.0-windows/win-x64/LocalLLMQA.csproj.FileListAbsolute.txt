@@ -435,3 +435,4 @@ C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Release\net9.0-window
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Release\net9.0-windows\win-x64\LocalLLMQA.pdb
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Release\net9.0-windows\win-x64\LocalLLMQA.genruntimeconfig.cache
 C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Release\net9.0-windows\win-x64\ref\LocalLLMQA.dll
+C:\Users\user\source\repos\LlamaSharp AI\LlamaSharp AI\obj\Release\net9.0-windows\win-x64\LocalLLMQA.sourcelink.json

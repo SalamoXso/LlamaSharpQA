@@ -13,6 +13,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <!-- Converters -->
+            
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
 
@@ -299,11 +300,10 @@
                     <TextBlock Text="Select Language Model" 
                      Style="{StaticResource SectionHeaderStyle}"/>
                     <Button Content="Add Model"
-                  HorizontalAlignment="Right"
-                  Style="{StaticResource SecondaryButtonStyle}"
-                  Command="{Binding AddModelCommand}"
-                  Cursor="Hand"
-                  Margin="0,0,60,0"/>
+        Style="{StaticResource SecondaryButtonStyle}"
+        Command="{Binding AddModelCommand}"
+        ToolTip="Add custom GGUF model files to the application"
+        Cursor="Hand"/>
                 </Grid>
                 <ComboBox Style="{StaticResource ModernComboBoxStyle}"
                   ItemsSource="{Binding AvailableModels}"
@@ -353,10 +353,10 @@
                     <TextBlock Text="Your Question"
                      Style="{StaticResource SectionHeaderStyle}"/>
                     <Button Content="Clear"
-                  HorizontalAlignment="Right"
-                  Style="{StaticResource SecondaryButtonStyle}"
-                  Command="{Binding ClearQuestionCommand}"
-                  Cursor="Hand"/>
+        HorizontalAlignment="Right"
+        Style="{StaticResource SecondaryButtonStyle}"
+        Command="{Binding ClearAllCommand}"
+        Cursor="Hand"/>
                 </Grid>
                 <TextBox Style="{StaticResource ModernTextBoxStyle}"
                  Text="{Binding Question, UpdateSourceTrigger=PropertyChanged}"
@@ -389,26 +389,35 @@
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <TextBlock Text="{Binding Answer}"
-                     TextWrapping="Wrap"
-                     FontSize="14"
-                     LineHeight="22"
-                     Foreground="{StaticResource TextPrimaryBrush}"
-                     Padding="0,8,0,0"/>
+               TextWrapping="Wrap"
+               FontSize="14"
+               LineHeight="22"
+               Foreground="{StaticResource TextPrimaryBrush}"
+               Padding="0,8,0,0"
+               TextAlignment="Left"/>
                 </ScrollViewer>
 
                 <!-- Loading Indicator -->
+                <!-- Modify the loading indicator grid -->
+                <!-- Loading Indicator -->
                 <Grid Grid.Row="1"
-              Background="#80FFFFFF"
-              Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}">
+      Background="#80FFFFFF"
+      Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <ProgressBar IsIndeterminate="True"
-                         Width="70"
-                         Height="6"
-                         Foreground="{StaticResource PrimaryBrush}"/>
-                        <TextBlock Text="Processing your question..."
-                       Margin="0,10,0,0"
-                       HorizontalAlignment="Center"
-                       Foreground="{StaticResource TextSecondaryBrush}"/>
+                     Width="70"
+                     Height="6"
+                     Foreground="{StaticResource PrimaryBrush}"/>
+                        <TextBlock Text="{Binding IsCancellationRequested, 
+                         Converter={x:Static converters:CancellingTextConverter.Instance}}"
+           Margin="0,10,0,0"
+           HorizontalAlignment="Center"
+           Foreground="{StaticResource TextSecondaryBrush}"/>
+                        <TextBlock Text="{Binding StatusMessage}"
+           Foreground="Red"
+           Margin="0,10,0,0"
+           HorizontalAlignment="Center"
+           Visibility="{Binding IsCancellationRequested, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -416,16 +425,24 @@
 
         <!-- Action Buttons -->
         <Grid Grid.Row="4">
+            <!-- In the Action Buttons section -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource PrimaryButtonStyle}"
-                Command="{Binding AskQuestionCommand}"
-                Content="Ask Question" 
-                Width="160"
-                IsEnabled="{Binding CanAskQuestion}">
+            Command="{Binding AskQuestionCommand}"
+            Content="Ask Question" 
+            Width="160"
+            IsEnabled="{Binding CanAskQuestion}"
+            Margin="0,0,10,0">
                     <Button.InputBindings>
                         <KeyBinding Key="Enter" Modifiers="Ctrl" Command="{Binding AskQuestionCommand}"/>
                     </Button.InputBindings>
                 </Button>
+
+                <Button Style="{StaticResource SecondaryButtonStyle}"
+            Command="{Binding CancelProcessingCommand}"
+            Content="Cancel"
+            Width="100"
+            IsEnabled="{Binding IsProcessing}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">

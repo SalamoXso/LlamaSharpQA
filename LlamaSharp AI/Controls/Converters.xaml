@@ -3,4 +3,5 @@
                     xmlns:conv="clr-namespace:LocalLLMQA.Converters">
     <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+    
 </ResourceDictionary>

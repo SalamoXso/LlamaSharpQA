@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Linq;
 using System.IO;
-using System.Windows.Threading;
+using System.Threading;
 
 namespace LocalLLMQA.ViewModels
 {
@@ -23,6 +23,7 @@ namespace LocalLLMQA.ViewModels
         private LLamaWeights? _currentModel;
         private string? _currentModelPath;
         private CancellationTokenSource _loadModelsCts = new();
+        private CancellationTokenSource _cancellationTokenSource = new();
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(AskQuestionCommand))]
@@ -41,6 +42,12 @@ namespace LocalLLMQA.ViewModels
 
         [ObservableProperty]
         private bool _isLoadingModels;
+
+        [ObservableProperty]
+        private string _statusMessage = string.Empty;
+
+        [ObservableProperty]
+        private bool _isCancellationRequested;
 
         public ObservableCollection<LlmModel> AvailableModels => _modelLoader.AvailableModels;
 
@@ -63,6 +70,10 @@ namespace LocalLLMQA.ViewModels
                 {
                     AskQuestionCommand.NotifyCanExecuteChanged();
                 }
+                else if (e.PropertyName == nameof(IsCancellationRequested))
+                {
+                    StatusMessage = IsCancellationRequested ? "Cancelling request..." : string.Empty;
+                }
             };
         }
 
@@ -73,7 +84,6 @@ namespace LocalLLMQA.ViewModels
                 IsLoadingModels = true;
                 _modelLoader.AvailableModels.Clear();
 
-                // Load both configured and discovered models
                 var configuredModels = await Task.Run(() => _modelLoader.GetConfiguredModels());
                 foreach (var model in configuredModels)
                 {
@@ -109,40 +119,65 @@ namespace LocalLLMQA.ViewModels
             try
             {
                 IsProcessing = true;
+                IsCancellationRequested = false;
                 Answer = "Processing...";
-                CommandManager.InvalidateRequerySuggested();
+                _cancellationTokenSource = new CancellationTokenSource();
 
-                // Store current model path to prevent race conditions
                 var currentModelPath = SelectedModel.FilePath;
                 var userQuestion = Question;
-                Question = string.Empty;
 
                 _currentModelPath = currentModelPath;
-                _currentModel = await Task.Run(() => _modelLoader.LoadModel(currentModelPath));
+                _currentModel = await Task.Run(() => _modelLoader.LoadModel(currentModelPath),
+                    _cancellationTokenSource.Token);
 
-                // Verify we're still using the same model
-                if (SelectedModel?.FilePath != currentModelPath)
+                if (SelectedModel?.FilePath != currentModelPath || _cancellationTokenSource.IsCancellationRequested)
                 {
-                    Answer = "Model changed during processing. Please try again.";
+                    Answer = "Model changed or operation cancelled during processing.";
                     return;
                 }
 
                 var response = await _chatService.GetResponse(
                     _currentModel,
                     currentModelPath,
-                    userQuestion);
+                    Question,
+                    _cancellationTokenSource.Token);
 
                 Answer = response;
+                Question = string.Empty;
+            }
+            catch (OperationCanceledException)
+            {
+                Answer = "Processing cancelled.";
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error during inference: {ex}");
                 Answer = $"Error: {ex.Message}";
             }
             finally
             {
                 IsProcessing = false;
-                CommandManager.InvalidateRequerySuggested();
+                IsCancellationRequested = false;
+                _cancellationTokenSource?.Dispose();
+            }
+        }
+
+       
+
+        [RelayCommand]
+        private void CancelProcessing()
+        {
+            if (!IsProcessing) return;
+
+            IsCancellationRequested = true;
+            try
+            {
+                _cancellationTokenSource?.Cancel();
+                Answer = "Cancelling...";
+                StatusMessage = "Attempting to cancel processing...";
+            }
+            catch (ObjectDisposedException)
+            {
+                // Token source was already disposed
             }
         }
 
@@ -166,6 +201,8 @@ namespace LocalLLMQA.ViewModels
             try
             {
                 IsLoadingModels = true;
+                StatusMessage = "Selecting model file...";
+
                 var modelPath = await Task.Run(() => _modelLoader.AddModelManually());
 
                 if (!string.IsNullOrEmpty(modelPath))
@@ -186,20 +223,20 @@ namespace LocalLLMQA.ViewModels
 
                             _modelLoader.AvailableModels.Add(newModel);
                             SelectedModel = newModel;
-                            Answer = $"Model added: {newModel.Name}";
+                            StatusMessage = $"Successfully added model: {newModel.Name}";
                         }
                         else
                         {
                             SelectedModel = existingModel;
-                            Answer = $"Model already exists: {existingModel.Name}";
+                            StatusMessage = $"Model already exists: {existingModel.Name}";
                         }
                     });
                 }
             }
             catch (Exception ex)
             {
+                StatusMessage = $"Error adding model: {ex.Message}";
                 Debug.WriteLine($"Error adding model: {ex}");
-                Answer = $"Error adding model: {ex.Message}";
             }
             finally
             {
@@ -208,9 +245,10 @@ namespace LocalLLMQA.ViewModels
         }
 
         [RelayCommand]
-        private void ClearQuestion()
+        private void ClearAll()
         {
             Question = string.Empty;
+            Answer = string.Empty;
         }
 
         [RelayCommand]

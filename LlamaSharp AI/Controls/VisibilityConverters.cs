@@ -30,4 +30,19 @@ namespace LocalLLMQA.Converters
             throw new NotImplementedException();
         }
     }
+
+    public class CancellingTextConverter : IValueConverter
+    {
+        public static readonly CancellingTextConverter Instance = new();
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value is bool isCancelling && isCancelling) ? "Cancelling..." : "Processing...";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

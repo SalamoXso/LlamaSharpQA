@@ -2,15 +2,26 @@
 using LLama.Common;
 using System.Text;
 using System.Diagnostics;
+using System.Threading;
 
 namespace LocalLLMQA.Services
 {
     public class ChatService
     {
-        public async Task<string> GetResponse(LLamaWeights model, string modelPath, string prompt)
+        public async Task<string> GetResponse(LLamaWeights model, string modelPath, string prompt, CancellationToken cancellationToken = default)
         {
+            // Check for null model before attempting inference
+            if (model == null)
+            {
+                Debug.WriteLine("Model is null. Aborting inference.");
+                return "Model is not loaded properly. Please ensure a valid model is selected.";
+            }
+
             try
             {
+                // Check cancellation before starting
+                cancellationToken.ThrowIfCancellationRequested();
+
                 // Diagnostic logging
                 Debug.WriteLine($"Starting inference with model: {modelPath}");
                 Debug.WriteLine($"Original prompt: {prompt}");
@@ -36,12 +47,19 @@ namespace LocalLLMQA.Services
 
                 var output = new StringBuilder();
                 int tokenCount = 0;
-                
-                await foreach (var token in executor.InferAsync(formattedPrompt, inferenceParams))
+                const int maxTokens = 512;
+
+                await foreach (var token in executor.InferAsync(formattedPrompt, inferenceParams, cancellationToken))
                 {
+                    // Check for cancellation more aggressively
+                    cancellationToken.ThrowIfCancellationRequested();
+
                     output.Append(token);
                     tokenCount++;
-                    if (tokenCount > 100) break; // Safety limit
+                    if (tokenCount >= maxTokens) break;
+
+                    // Add small delay to allow cancellation to be processed
+                    await Task.Delay(1, cancellationToken);
                 }
 
                 string rawResponse = output.ToString();
@@ -60,6 +78,11 @@ namespace LocalLLMQA.Services
                 }
 
                 return cleanedResponse;
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.WriteLine("Inference was successfully cancelled");
+                throw; // Re-throw to let the caller handle it
             }
             catch (Exception ex)
             {

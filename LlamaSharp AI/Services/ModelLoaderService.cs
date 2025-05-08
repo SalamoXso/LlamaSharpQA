@@ -23,7 +23,22 @@ namespace LocalLLMQA.Services
             _modelsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "models");
             InitializeModels();
         }
+        public bool ValidateModel(string modelPath)
+        {
+            try
+            {
+                if (!File.Exists(modelPath)) return false;
+                if (!modelPath.EndsWith(".gguf", StringComparison.OrdinalIgnoreCase)) return false;
 
+                // Quick check if file is a valid GGUF
+                using var stream = File.OpenRead(modelPath);
+                return stream.Length > 1024; // Basic size validation
+            }
+            catch
+            {
+                return false;
+            }
+        }
         private void InitializeModels()
         {
             try
@@ -144,24 +159,35 @@ namespace LocalLLMQA.Services
             }
         }
 
-        public LLamaWeights LoadModel(string modelPath)
+        public LLamaWeights? LoadModel(string modelPath)
         {
-            if (string.IsNullOrWhiteSpace(modelPath))
-                throw new ArgumentException("Model path cannot be empty");
-
-            if (!File.Exists(modelPath))
-                throw new FileNotFoundException($"Model file not found at: {modelPath}");
-
-            if (!modelPath.EndsWith(".gguf", StringComparison.OrdinalIgnoreCase))
-                throw new ArgumentException("Only GGUF model files are supported");
-
-            var parameters = new ModelParams(modelPath)
+            try
             {
-                ContextSize = 2048,
-                GpuLayerCount = 0
-            };
+                if (string.IsNullOrWhiteSpace(modelPath) || !File.Exists(modelPath))
+                {
+                    Debug.WriteLine("Model path is invalid or file does not exist.");
+                    return null;
+                }
 
-            return LLamaWeights.LoadFromFile(parameters);
+                if (!modelPath.EndsWith(".gguf", StringComparison.OrdinalIgnoreCase))
+                {
+                    Debug.WriteLine("Unsupported model file format.");
+                    return null;
+                }
+
+                var parameters = new ModelParams(modelPath)
+                {
+                    ContextSize = 2048,
+                    GpuLayerCount = 0
+                };
+
+                return LLamaWeights.LoadFromFile(parameters);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to load model: {ex.Message}");
+                return null;
+            }
         }
 
     }
